@@ -1,14 +1,20 @@
-const { generateUsername } = require("unique-username-generator");
+// const { generateUsername } = require("unique-username-generator");
+const { generatePirateName } = require("../util/pirateNames.js");
 const uuid = require("uuid");
 const ERR_MSGS = require("../util/error_messages.js");
 const util = require("../util/util.js");
 
 const players = [];
+
 const create = (name) => {
+  const finalName =
+    name && String(name).trim() ? String(name).trim() : generatePirateName(); // <- pirate name fallback
+
   const player = {
     id: uuid.v4(),
-    name: !name ? generateUsername() : name,
+    name: finalName,
   };
+
   players.push(player);
   return player;
 };
